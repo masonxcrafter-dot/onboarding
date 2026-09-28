@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Valero Labs Client Onboarding</title>
+<meta name="description" content="Onboard with Valero Labs: tell us about your business, connect your accounts, upload assets and book your kickoff call.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <a class="brand" href="index.html" aria-label="Valero Labs client onboarding">
+      <svg width="44" height="44" viewBox="110 111 300 300" aria-hidden="true"><polygon points="126,153 190,153 260,300 322,300 290,370 230,370" fill="#F6F4EF"/><polygon points="330,153 394,153 322,300 260,300" fill="#F5A623"/></svg>
+      <span>
+        <span class="brand-name" style="display:block">VALERO LABS</span>
+        <span class="brand-sub" style="display:block">CLIENT ONBOARDING</span>
+      </span>
+    </a>
+    <nav class="steps" id="steps" aria-label="Onboarding steps"></nav>
+    <details class="mobile-steps" id="mobileSteps">
+      <summary id="mobileStepsLabel">STEP 1 OF 11</summary>
+      <nav class="steps" id="stepsMobile" aria-label="Onboarding steps"></nav>
+    </details>
+    <div class="help">
+      <span class="mono">Need a hand?</span>
+      <strong>Your account strategist</strong>
+      <p id="helpContact"></p>
+      <small>Progress saves on this device as you go. Come back anytime.</small>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="progress">
+        <span class="mono" id="progressLabel">STEP 1 OF 11 · 0% DONE</span>
+        <div class="bar" role="progressbar" aria-label="Onboarding progress" id="progressBar" aria-valuemin="0" aria-valuemax="100"><span id="progressFill" style="width:0%"></span></div>
+      </div>
+      <span class="flow">Ad → Lead → Estimate → Job → Revenue</span>
+    </header>
+
+    <section class="content" id="content" tabindex="-1" aria-live="polite"></section>
+
+    <footer class="footer" id="footer">
+      <span id="footLeft"></span>
+      <button type="button" class="btn btn-primary" id="nextBtn">
+        <span id="nextLabel">Start onboarding</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </footer>
+  </main>
+</div>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Valero Labs Client Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="portal">
+<div class="shell" style="grid-template-columns: 260px minmax(0, 1fr)">
+  <aside class="rail" style="gap:36px;padding:32px 20px">
+    <a class="brand" href="portal.html" style="padding:0 8px">
+      <svg width="40" height="40" viewBox="110 111 300 300" aria-hidden="true"><polygon points="126,153 190,153 260,300 322,300 290,370 230,370" fill="#F6F4EF"/><polygon points="330,153 394,153 322,300 260,300" fill="#F5A623"/></svg>
+      <span class="brand-name" style="font-size:18px">VALERO LABS</span>
+    </a>
+    <nav class="portal-nav" aria-label="Portal">
+      <a href="#overview" aria-current="page">Overview</a>
+      <a href="#plan">Launch plan</a>
+      <a href="#funnel">Leads &amp; revenue</a>
+      <a href="#todos">Your to-dos</a>
+      <a href="#documents">Documents</a>
+      <a href="#team">Your team</a>
+      <a href="index.html">Onboarding</a>
+    </nav>
+    <div class="who">
+      <div class="avatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></div>
+      <div><strong id="bizName">[CLIENT BUSINESS]</strong><span id="ownerName">[OWNER NAME]</span></div>
+    </div>
+  </aside>
+
+  <main class="portal-main" id="overview">
+    <header class="portal-head">
+      <div class="stack" style="gap:8px">
+        <span class="eyebrow" style="font-size:12px">Client portal</span>
+        <h1 class="h2" id="welcome">Welcome back.</h1>
+        <p class="sub" style="font-size:16px" id="launchLine">Your Done-For-You Lead System is being built.</p>
+      </div>
+      <a class="btn btn-ghost" href="index.html">Review onboarding</a>
+    </header>
+
+    <section class="panel" id="plan" aria-labelledby="planTitle">
+      <div class="panel-head"><h2 id="planTitle">Launch plan</h2><span class="mono" id="buildDays">14-DAY BUILD</span></div>
+      <div class="phases" id="phases"></div>
+    </section>
+
+    <div class="split">
+      <div>
+        <section class="panel funnel" id="funnel" aria-labelledby="funnelTitle">
+          <div class="panel-head"><h2 id="funnelTitle">Your funnel</h2><span class="mono">Live after launch</span></div>
+          <div class="kpis">
+            <div class="kpi"><span class="mono">Ad spend</span><b>—</b></div>
+            <div class="kpi"><span class="mono">Leads</span><b>—</b></div>
+            <div class="kpi"><span class="mono">Estimates</span><b>—</b></div>
+            <div class="kpi"><span class="mono">Booked jobs</span><b>—</b></div>
+            <div class="kpi rev"><span class="mono">Revenue</span><b>—</b></div>
+          </div>
+          <p class="funnel-note" id="targetLine">Finish onboarding to set your monthly target.</p>
+        </section>
+
+        <section class="panel" id="documents" aria-labelledby="docsTitle">
+          <h2 id="docsTitle">Documents</h2>
+          <div class="docs">
+            <div class="doc"><b>Service agreement</b><span>Signed before onboarding</span></div>
+            <a class="doc" href="index.html"><b>Onboarding summary</b><span id="summaryState">Your answers</span></a>
+            <div class="doc"><b>Kickoff call notes</b><span id="notesState">After your call</span></div>
+          </div>
+        </section>
+      </div>
+
+      <div>
+        <section class="panel" id="todos" aria-labelledby="todoTitle">
+          <h2 id="todoTitle">Your to-dos</h2>
+          <div class="todos" id="todoList"></div>
+        </section>
+        <section class="panel" id="team" aria-labelledby="teamTitle" style="flex-grow:1">
+          <h2 id="teamTitle">Your team</h2>
+          <div class="team">
+            <div class="avatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></div>
+            <div><strong id="stratName">[STRATEGIST NAME]</strong><span>Account strategist</span></div>
+          </div>
+          <p class="contact" id="stratContact"></p>
+          <a class="btn btn-dark btn-sm" id="msgBtn" href="#">Email your strategist</a>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="config.js"></script>
+<script>
+(function () {
+  var CFG = window.VALERO_CONFIG || {}, st = CFG.strategist || {};
+  var s = {};
+  try { s = JSON.parse(localStorage.getItem("valero-onboarding-v1") || "{}") || {}; } catch (e) {}
+  var form = s.form || {}, access = s.access || {}, assets = s.assetNames || {};
+  function $(id) { return document.getElementById(id); }
+  function esc(v) { return String(v).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function num(v) { var n = parseFloat(String(v || "").replace(/[^0-9.]/g, "")); return isNaN(n) ? 0 : n; }
+
+  var first = (form["Owner Name"] || "").trim().split(" ")[0];
+  if (form["Business Name"]) $("bizName").textContent = form["Business Name"];
+  if (form["Owner Name"]) $("ownerName").textContent = form["Owner Name"];
+  $("welcome").textContent = first ? "Welcome back, " + first + "." : "Welcome back.";
+
+  var finished = s.step != null && s.step >= 11;
+  var days = CFG.launchDays || 14;
+  $("buildDays").textContent = days + "-DAY BUILD";
+  $("launchLine").textContent = finished
+    ? "Your Done-For-You Lead System is being built. Target launch is about " + days + " days after your kickoff call."
+    : "Finish onboarding so we can start building your Done-For-You Lead System.";
+
+  var phases = [
+    ["Onboarding", "Info, access and assets received. Kickoff booked.", finished ? 100 : Math.round(((s.step || 0) / 11) * 100)],
+    ["Audit & tracking", "Profile audit, call tracking and form tracking setup.", finished ? 50 : 0],
+    ["Build the system", "Offer, ad creative, landing page, instant follow-up.", 0],
+    ["Launch", "Ads go live and leads start hitting your phone.", 0]
+  ];
+  $("phases").innerHTML = phases.map(function (p) {
+    var state = p[2] >= 100 ? ["DONE", "ok", " done"] : p[2] > 0 ? ["IN PROGRESS", "progress", ""] : ["UP NEXT", "", ""];
+    return '<div class="phase' + state[2] + '"><div class="track"><span style="width:' + p[2] + '%"></span></div>' +
+      '<div><span class="badge ' + state[1] + '">' + state[0] + "</span></div><h3>" + esc(p[0]) + "</h3><p>" + esc(p[1]) + "</p></div>";
+  }).join("");
+
+  var jobs = num(form["Extra Jobs / Month"]), ticket = num(form["Avg Ticket ($)"]);
+  if (jobs && ticket) $("targetLine").textContent = "Monthly target from onboarding: " + jobs + " extra jobs · $" + Math.round(jobs * ticket).toLocaleString("en-US") + " in revenue";
+
+  $("summaryState").textContent = finished ? "Submitted · view or edit" : "In progress · continue";
+  $("notesState").textContent = s.booked ? "Shared after your call" : "Book your call first";
+
+  var todos = [
+    ["Finish your onboarding", finished, "index.html"],
+    ["Book your kickoff call", !!s.booked, CFG.calendlyUrl],
+    ["Grant Google Business Profile access", !!access.gbp],
+    ["Grant Meta partner access", !!access.meta],
+    ["Grant website access", !!access.site],
+    ["Upload before & after photos", !!(assets.jobs && assets.jobs.length)],
+    ["Approve your ad offer after kickoff", false]
+  ];
+  var extra = {};
+  try { extra = JSON.parse(localStorage.getItem("valero-portal-todos") || "{}") || {}; } catch (e) {}
+  $("todoList").innerHTML = todos.map(function (t, i) {
+    var on = t[1] || !!extra[i];
+    return '<label for="todo' + i + '"><input type="checkbox" id="todo' + i + '" data-i="' + i + '"' + (on ? " checked" : "") + (t[1] ? " disabled" : "") + "><span>" +
+      (t[2] && !t[1] ? '<a href="' + esc(t[2]) + '"' + (/^https?:/.test(t[2]) ? ' target="_blank" rel="noopener"' : "") + ">" + esc(t[0]) + "</a>" : esc(t[0])) + "</span></label>";
+  }).join("");
+  $("todoList").addEventListener("change", function (e) {
+    var i = e.target.dataset.i; if (i == null) return;
+    extra[i] = e.target.checked;
+    try { localStorage.setItem("valero-portal-todos", JSON.stringify(extra)); } catch (err) {}
+  });
+
+  $("stratName").textContent = st.name || "[STRATEGIST NAME]";
+  $("stratContact").textContent = "Replies within one business day. Urgent? Call " + (st.phone || "[PHONE]") + ". Email: " + (st.email || "[EMAIL]");
+  if (st.email && st.email.indexOf("@") > 0) $("msgBtn").href = "mailto:" + st.email + "?subject=" + encodeURIComponent("Question from " + (form["Business Name"] || "a client"));
+  else $("msgBtn").hidden = true;
+
+  var links = document.querySelectorAll('.portal-nav a[href^="#"]');
+  links.forEach(function (a) { a.addEventListener("click", function () { links.forEach(function (b) { b.removeAttribute("aria-current"); }); a.setAttribute("aria-current", "page"); }); });
+})();
+</script>
+</body>
+</html>
