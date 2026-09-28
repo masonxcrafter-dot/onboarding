@@ -81,6 +81,10 @@ SALE CLOSED → Agreement Signed → Payment Collected → Welcome Email → Int
 - [Launch QA Checklist](checklists/launch-qa-checklist.md)
 - [Onboarding Tasks CSV](checklists/onboarding-tasks.csv) — import into ClickUp / Asana / Monday / GHL Tasks
 
+### Website
+
+- [Onboarding Website](site/) — client-facing onboarding flow (`site/index.html`) and client portal (`site/portal.html`)
+
 ### GoHighLevel
 
 - [Pipelines, Workflows & Custom Fields](ghl/ghl-setup.md)
